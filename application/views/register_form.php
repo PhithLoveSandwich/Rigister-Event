@@ -71,8 +71,25 @@
         <?php echo form_open('auth/register_user'); ?>
             <label for="username">ชื่อผู้ใช้:</label>
             <input type="text" name="username" required>
+
             <label for="password">รหัสผ่าน:</label>
-            <input type="password" name="password" required>
+            <input type="password" name="password" maxlength="8" required>
+
+            <label for="identification_number">รหัสประจำตัว:</label>
+            <input type="text" name="identification_number" required>
+
+            <label for="faculty">คณะ:</label>
+            <input type="text" name="faculty" required>
+
+            <label for="major">สาขาวิชา:</label>
+            <input type="text" name="major" required>
+
+            <label for="user_type">ประเภทบุคลากร:</label>
+            <select name="user_type" required>
+                <option value="student">นักศึกษา</option>
+                <option value="faculty">บุคลากรทางการศึกษา</option>
+            </select>
+
             <input type="submit" value="ลงทะเบียน">
         <?php echo form_close(); ?>
         <p>คุณมีบัญชีอยู่แล้ว? <a href="<?php echo site_url('auth/login'); ?>">เข้าสู่ระบบที่นี่</a>.</p>

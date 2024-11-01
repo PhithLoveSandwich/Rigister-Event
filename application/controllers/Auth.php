@@ -17,15 +17,27 @@ class Auth extends CI_Controller {
         
         // รับข้อมูลจากฟอร์ม
         $username = $this->input->post('username');
-        $password = password_hash($this->input->post('password'), PASSWORD_BCRYPT); // เข้ารหัสรหัสผ่าน
-        
+        $password = $this->input->post('password');
+        $identification_number = $this->input->post('identification_number');
+        $faculty = $this->input->post('faculty');
+        $major = $this->input->post('major');
+        $user_type = $this->input->post('user_type');
+    
+        // ตรวจสอบความถูกต้องของข้อมูล (สามารถปรับแต่งตามความต้องการ)
+        if (empty($username) || empty($password) || empty($identification_number) || 
+            empty($faculty) || empty($major) || empty($user_type)) {
+            echo "All fields are required!";
+            return;
+        }
+    
         // บันทึกข้อมูลผู้ใช้
-        if ($this->User_model->insert_user($username, $password)) {
+        if ($this->User_model->insert_user($username, $password, $identification_number, $faculty, $major, $user_type)) {
             echo "Registration successful!";
         } else {
-            echo "Registration failed!";
+            echo "Registration failed! Please check your inputs or try again.";
         }
     }
+    
 
     public function login() {
         // โหลด Helper ที่ใช้สำหรับทำงานกับ Form และ URL
